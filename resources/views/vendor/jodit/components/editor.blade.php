@@ -158,7 +158,7 @@
             var CONNECTOR = @json ($connectorUrl);
             var BUTTONS = @json ($resolvedButtons);
             var DEBOUNCE_MS = @json ($debounce);
-            var DEFAULTS = @json (config("jodit.defaults"));
+            var DEFAULTS = @json ($resolvedConfig);
             var ATOMIC_OPTIONS = @json (config("jodit.atomic_options", []));
             var DISABLE_PLUGINS = @json ($resolvedDisablePlugins);
             var READONLY = @json ($readonly);
@@ -225,7 +225,7 @@
                 if (WITH_BROWSER) {
                     if (CONNECTOR) {
                         // ── Built-in connector (or 'custom' backend via connector-url) ──
-                        cfg.uploader = {
+                        cfg.uploader = Object.assign({}, cfg.uploader || {}, {
                             url: CONNECTOR + "?action=upload",
                             headers: { "X-CSRF-TOKEN": csrfToken },
                             data: instanceData(),
@@ -253,24 +253,24 @@
                                     msg: r.message || "",
                                 };
                             },
-                        };
+                        });
 
-                        cfg.filebrowser = {
+                        cfg.filebrowser = Object.assign({}, cfg.filebrowser || {}, {
                             isSuccess: function (r) {
                                 return !!r.success;
                             },
                             getMessage: function (r) {
                                 return r.message || "";
                             },
-                            ajax: {
+                            ajax: Object.assign({}, (cfg.filebrowser && cfg.filebrowser.ajax) || {}, {
                                 url: CONNECTOR,
                                 headers: { "X-CSRF-TOKEN": csrfToken },
                                 data: instanceData(),
                                 prepareData: function (data) {
                                     return Object.assign({}, data || {}, instanceData());
                                 },
-                            },
-                            uploader: {
+                            }),
+                            uploader: Object.assign({}, (cfg.filebrowser && cfg.filebrowser.uploader) || {}, {
                                 url: CONNECTOR + "?action=upload",
                                 headers: { "X-CSRF-TOKEN": csrfToken },
                                 data: instanceData(),
@@ -298,8 +298,8 @@
                                         msg: r.message || "",
                                     };
                                 },
-                            },
-                        };
+                            }),
+                        });
                     }
                 }
 

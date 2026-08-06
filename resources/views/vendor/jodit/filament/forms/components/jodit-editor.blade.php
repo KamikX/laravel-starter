@@ -1,12 +1,13 @@
 @php
     $statePath = $getStatePath();
+    $editorConfig = $field->getConfig();
     $configuredHeight = $field->getHeight();
     $height = $configuredHeight !== 0 && $configuredHeight !== "0"
         ? $configuredHeight
-        : config("jodit.defaults.height", "auto");
+        : ($editorConfig["height"] ?? "auto");
     $minimumHeight = is_numeric($height) && (int) $height > 0
         ? (int) $height
-        : max((int) config("jodit.defaults.minHeight", 200), 1);
+        : max((int) ($editorConfig["minHeight"] ?? 200), 1);
     $hasFileBrowser = $field->hasFileBrowser();
     $connectorUrl = $field->getConnectorUrl();
     $basePath = $field->getBasePath();
@@ -15,7 +16,8 @@
         $basePath,
         $field->getDirectory(),
     );
-    $language = $field->getLanguage() ?? config("jodit.language");
+    $language = $field->getLanguage()
+        ?? ($editorConfig["language"] ?? config("jodit.language"));
     $languageScripts = collect(config("jodit.language_scripts", []))->unique()->map(fn(string $script): string => asset($script))->values()->all();
     $pluginScripts = collect(config("jodit.plugin_scripts", []))->unique()->map(fn(string $script): string => asset($script))->values()->all();
     $assets = \KamikX\LaravelJodit\Support\JoditAssets::configuration();
@@ -47,7 +49,7 @@
             assets: @js($assets),
             languageScripts: @js($languageScripts),
             pluginScripts: @js($pluginScripts),
-            defaults: @js(config('jodit.defaults')),
+            defaults: @js($editorConfig),
             atomicOptions: @js(config('jodit.atomic_options', [])),
             height: @js($height),
             minimumHeight: @js($minimumHeight),

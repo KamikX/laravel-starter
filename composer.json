@@ -8,7 +8,7 @@
     "require": {
         "php": "^8.3",
         "filament/filament": "^5.0",
-        "kamikx/laravel-jodit": "^1.0",
+        "kamikx/laravel-jodit": "@dev",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
         "livewire/blaze": "^1.0",

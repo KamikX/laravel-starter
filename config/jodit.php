@@ -104,7 +104,7 @@ return [
         'enabled' => true,
         'prefix' => 'jodit',
         'name' => 'jodit.connector',
-        'middleware' => ['web', 'auth', 'throttle:60,1'],
+        'middleware' => ['web', 'throttle:60,1'],
     ],
 
     /*
@@ -131,7 +131,7 @@ return [
     */
 
     'max_file_size' => 10240, // kilobytes
-    'allowed_mimes' => 'jpeg,jpg,png,gif,webp,avif,pdf,doc,docx,xls,xlsx,zip,txt',
+    'allowed_mimes' => 'jpeg,jpg,png,svg,webp,avif,zip,txt,docx,xlsx',
     'preserve_file_names' => false,
 
     /*
@@ -145,7 +145,7 @@ return [
     |
     */
 
-    'language' => null,
+    'language' => 'sk',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,6 +175,32 @@ return [
             'mode' => 'ace/mode/html',
             'theme' => 'ace/theme/idle_fingers',
             'wrap' => true,
+        ],
+        'uploader' => [
+            'showTabInFileSelector' => false,
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Editor Presets
+    |--------------------------------------------------------------------------
+    |
+    | Named sets of Jodit options that can be reused by Blade components and
+    | Filament fields. Options are merged in this order: defaults, preset,
+    | per-instance config, and finally explicit component/field settings.
+    | Nested maps are merged recursively while lists are replaced in full.
+    |
+    */
+
+    'default_preset' => null,
+
+    'presets' => [
+        'article' => [
+            // 'minHeight' => 800,
+            'toolbarButtonSize' => 'large',
+            'toolbarSticky' => true,
+            'toolbarStickyOffset' => 80,
         ],
     ],
 

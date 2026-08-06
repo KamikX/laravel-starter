@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d73bbbc06296f63003130ee698d2c6cb",
+    "content-hash": "6dd826df9f9ae47691e5b4776a409e5a",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2172,17 +2172,11 @@
         },
         {
             "name": "kamikx/laravel-jodit",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KamikX/laravel-jodit.git",
-                "reference": "7e6550d5959ab858da7325b0472d9ee2020ce91f"
-            },
+            "version": "dev-development",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KamikX/laravel-jodit/zipball/7e6550d5959ab858da7325b0472d9ee2020ce91f",
-                "reference": "7e6550d5959ab858da7325b0472d9ee2020ce91f",
-                "shasum": ""
+                "type": "path",
+                "url": ".packages/kamikx/laravel-jodit",
+                "reference": "2a1e40dfcbae76fe157972a2d5d01761bb9617a2"
             },
             "require": {
                 "illuminate/filesystem": "^11.0|^12.0|^13.0",
@@ -2214,7 +2208,11 @@
                     "KamikX\\LaravelJodit\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "KamikX\\LaravelJodit\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -2238,10 +2236,10 @@
                 "rich-text",
                 "wysiwyg"
             ],
-            "support": {
-                "source": "https://github.com/KamikX/laravel-jodit/tree/1.0.1"
-            },
-            "time": "2026-08-04T10:43:42+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -12614,7 +12612,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "kamikx/laravel-jodit": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

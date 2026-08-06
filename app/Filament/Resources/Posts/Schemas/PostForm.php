@@ -17,7 +17,14 @@ class PostForm
                     ->columnSpanFull(),
                 JoditEditor::make('description')
                     ->required()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->preset('article')
+                    // ->config(fn (): array => [
+                    //     'toolbarButtonSize' => 'small',
+                    //     'uploader' => [
+                    //         'showTabInFileSelector' => true,
+                    //     ],
+                    // ]),
             ]);
     }
 }
